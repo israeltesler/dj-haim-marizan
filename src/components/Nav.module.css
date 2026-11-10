@@ -1,0 +1,60 @@
+.nav {
+  position: absolute; z-index: 6; top: calc(28 * var(--u)); left: var(--edge); right: var(--edge);
+  height: calc(45 * var(--u)); display: flex; align-items: center; justify-content: space-between;
+  font-size: calc(18 * var(--u)); letter-spacing: -.045em;
+}
+.nav[data-menu-open] {
+  z-index: 25;
+}
+.clock { display: flex; gap: calc(4 * var(--u)); flex-shrink: 0; }
+.zone { color: var(--clock-grey); }
+.time { font-variant-numeric: tabular-nums; }
+.menuButton {
+  position: absolute; left: calc(50% + .5 * var(--u)); top: 50%; translate: -50% -50%;
+  display: flex; flex-direction: column; align-items: center; gap: calc(3 * var(--u));
+  padding: 0; background: transparent; font-size: calc(14 * var(--u)); letter-spacing: -.025em;
+}
+.menuButton > span:last-child { margin-left: -.025em; }
+.bars { width: calc(34 * var(--u)); height: calc(13 * var(--u)); display: flex; align-items: flex-end; gap: calc(2 * var(--u)); }
+.bars i { display: block; width: calc(2 * var(--u)); background: var(--white); transition: height .28s var(--ease-out); }
+.social {
+  display: flex; align-items: center; gap: calc(6 * var(--u)); flex-shrink: 0;
+}
+.socialLink {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: calc(36 * var(--u));
+  height: calc(36 * var(--u));
+  padding: 0;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--black);
+  transition: color .25s var(--ease), background .25s var(--ease), scale .25s var(--ease);
+}
+.icon {
+  width: calc(16 * var(--u));
+  height: calc(16 * var(--u));
+  flex-shrink: 0;
+}
+@media (hover: hover) {
+  .socialLink.whatsapp:hover {
+    background: #25d366;
+    color: var(--white);
+    scale: 1.04;
+  }
+  .socialLink.instagram:hover {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: var(--white);
+    scale: 1.04;
+  }
+}
+@media (max-width: 1023px) {
+  .nav { top: calc(20 * var(--u)); font-size: calc(13 * var(--u)); }
+  .zone { display: none; }
+  .menuButton { font-size: calc(13 * var(--u)); }
+  .socialLink {
+    width: calc(32 * var(--u));
+    height: calc(32 * var(--u));
+  }
+  .icon { width: calc(14 * var(--u)); height: calc(14 * var(--u)); }
+  .social { gap: calc(5 * var(--u)); }
+}

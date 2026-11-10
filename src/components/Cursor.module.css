@@ -1,0 +1,8 @@
+.anchor { position: fixed; z-index: 100; left: 0; top: 0; width: 0; height: 0; pointer-events: none; opacity: 0; transition: opacity .16s var(--ease); }
+.anchor[data-visible="true"] { opacity: 1; }
+.anchor[data-hidden="true"] { opacity: 0; }
+.anchor span {
+  position: absolute; left: calc(-10 * var(--u)); top: calc(-10 * var(--u)); width: calc(20 * var(--u)); height: calc(20 * var(--u));
+  border: 1px solid var(--white); border-radius: 50%; background: var(--cursor-fill);
+}
+@media (hover:none),(pointer:coarse) { .anchor { display: none; } }

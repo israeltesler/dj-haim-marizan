@@ -1,0 +1,60 @@
+.release { position: relative; height: calc(900 * var(--u)); isolation: isolate; overflow: hidden; --cx: 50%; --cy: 50%; }
+.wave { position: absolute; z-index: 1; left: 0; top: calc(620 * var(--u)); width: 100%; height: calc(54 * var(--u)); pointer-events: none; opacity: 0; transition: opacity .4s var(--ease); }
+.waveOn { opacity: 1; }
+.kicker,.date { position: absolute; top: calc(48 * var(--u)); font-size: calc(18 * var(--u)); letter-spacing: -.045em; white-space: nowrap; }
+.kicker { left: var(--edge); }
+.date { left: calc(1081 * var(--u)); }
+.title {
+  position: absolute; top: calc(157 * var(--u)); left: calc(50% - 404 * var(--u)); width: calc(808 * var(--u)); margin: 0;
+  display: flex; flex-direction: column; align-items: center; gap: calc((160 - .729 * 180) * var(--u));
+  direction: rtl;
+  font: 500 calc(180 * var(--u))/1 var(--display); font-stretch: 87.5%; letter-spacing: -.04em; white-space: nowrap;
+}
+.title > :global(.trim-display) { margin-left: -.04em; }
+.title > :global(.trim-display) > span { display: inline-block; opacity: 0; transform: translateY(130%); filter: blur(calc(40 * var(--u))); }
+.visible .title > :global(.trim-display) > span { animation: titleIn .5s var(--ease) var(--delay) both; }
+.lp {
+  position: absolute; right: 0; top: calc((13 - .3645 * 28) * var(--u)); font-size: calc(28 * var(--u));
+  font-weight: 400; letter-spacing: -.06em !important; margin: 0 .06em 0 0 !important; opacity: 0;
+}
+.visible .lp { animation: fade .5s var(--ease) 1.35s both; }
+.album {
+  position: absolute; z-index: 3; top: calc(320 * var(--u)); left: calc(50% - 217 * var(--u));
+  width: calc(434 * var(--u)); height: calc(434 * var(--u)); padding: 0; background: transparent; mix-blend-mode: difference;
+  transform: perspective(calc(850 * var(--u))) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  transition: transform .12s cubic-bezier(.22,.8,.3,1); transform-style: preserve-3d;
+}
+.album > img:first-child { width: 100%; height: 100%; object-fit: cover; }
+.play,.pause { position: absolute; left: 50%; top: 50%; translate: -50% -50%; }
+.play { width: calc(42 * var(--u)); height: calc(52 * var(--u)); }
+.pause { display: flex; gap: calc(8 * var(--u)); }
+.pause i { width: calc(13 * var(--u)); height: calc(48 * var(--u)); border-radius: calc(2 * var(--u)); background: var(--white); }
+.caption {
+  position: absolute; top: calc(794 * var(--u)); width: 100%; display: flex; flex-direction: column; align-items: center;
+  gap: calc(12 * var(--u)); font-size: calc(18 * var(--u)); letter-spacing: -.045em; white-space: nowrap;
+}
+.caption span { margin-left: -.045em; }
+.caption span:last-child { color: var(--grey); }
+.cursor {
+  position: absolute; z-index: 20; top: var(--cy); left: var(--cx); width: calc(100 * var(--u)); height: calc(100 * var(--u));
+  border: 1px solid var(--white); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: calc((12 - .71 * 14) * var(--u)); font-size: calc(14 * var(--u)); letter-spacing: -.045em; pointer-events: none;
+  opacity: 0; transform: translate(-50%,-50%) scale(.68); transition: opacity .22s var(--ease), transform .38s var(--ease-out);
+}
+@media (hover: hover) { .release:has(.album:hover) .cursor { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
+@keyframes titleIn { to { opacity: 1; transform: none; filter: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 1023px) {
+  .release { height: calc(600 * var(--u)); }
+  .wave { top: calc(313 * var(--u)); }
+  .kicker,.date { left: var(--edge); font-size: calc(13 * var(--u)); }
+  .kicker { top: calc(40 * var(--u)); } .date { top: calc(62 * var(--u)); }
+  .title { top: calc(120 * var(--u)); left: 50%; width: max-content; translate: -50% 0; gap: calc((64 - .729 * 72) * var(--u)); font-size: calc(72 * var(--u)); }
+  .lp { top: calc(-.3645 * 14 * var(--u)); right: calc(-4 * var(--u)); font-size: calc(14 * var(--u)); }
+  .album { top: calc(200 * var(--u)); left: calc(50% - 140 * var(--u)); width: calc(280 * var(--u)); height: calc(280 * var(--u)); }
+  .caption { top: calc(512 * var(--u)); font-size: calc(13 * var(--u)); }
+  .cursor { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .title > :global(.trim-display) > span,.lp { opacity: 1; transform: none; filter: none; animation: none; }
+}

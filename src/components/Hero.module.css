@@ -1,0 +1,153 @@
+.hero {
+  position: relative; height: 100svh; min-height: calc(620 * var(--u)); overflow: hidden; isolation: isolate;
+  --scale: 1; --shift: 0%;
+}
+@media (min-width: 1024px) {
+  .hero .name,
+  .hero .subrow {
+    left: calc(68 * var(--u));
+    right: calc(68 * var(--u));
+  }
+  .hero .registered,
+  .hero .cta {
+    right: calc(68 * var(--u));
+  }
+  .hero .notes {
+    left: calc(68 * var(--u));
+  }
+  .hero :global(nav) {
+    left: calc(68 * var(--u));
+    right: calc(68 * var(--u));
+  }
+}
+.media { position: absolute; inset: 0; transform: translate3d(0,var(--shift),0) scale(var(--scale)); transform-origin: 50% 50%; }
+.media > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; opacity: 0; transition: opacity .6s var(--ease); }
+.media > img.loaded { opacity: 1; }
+.shade {
+  position: absolute; top: 0; right: 0; left: calc((100% - min(100%, calc(1440 * var(--u)))) / 2 + 558 * var(--u));
+  height: calc(200 * var(--u)); background: var(--hero-shade);
+}
+.fallback {
+  position: absolute; inset: 0; opacity: 0; pointer-events: none; mix-blend-mode: screen; filter: blur(9px);
+  background: radial-gradient(circle calc(180 * var(--u)) at var(--x) var(--y),rgba(255,99,15,.44),rgba(255,99,15,.08) 45%,transparent 73%);
+  transition: opacity .3s var(--ease);
+}
+.hero:hover .fallback { opacity: 1; }
+@media (hover: none) {
+  .hero:active .fallback,
+  .hero[data-touching] .fallback { opacity: 1; }
+}
+.name {
+  position: absolute; top: calc(129 * var(--u)); left: var(--edge); right: var(--edge); margin: 0;
+  display: flex; align-items: center; justify-content: space-between; white-space: nowrap;
+  font: 500 calc(231 * var(--u))/1 var(--display); font-stretch: 87.5%; letter-spacing: -.06em;
+}
+.nameGroup { width: calc(897 * var(--u)); display: flex; justify-content: space-between; }
+.surname { font-weight: 200; margin-right: .06em; }
+.name :global(.trim-display) > span { display: inline-block; }
+.registered {
+  position: absolute; top: calc(129 * var(--u)); right: var(--edge); font-size: calc(40 * var(--u));
+  font-weight: 600; letter-spacing: -.06em; margin-right: .06em;
+}
+.subrow {
+  position: absolute; top: calc(325 * var(--u)); left: var(--edge); right: var(--edge);
+  display: flex; justify-content: space-between; font-size: calc(18 * var(--u)); letter-spacing: -.035em; text-transform: uppercase; white-space: nowrap;
+}
+.subrow span:last-child { margin-right: .035em; }
+.notes {
+  --lh: calc(20 * var(--u)); position: absolute; left: var(--edge); bottom: calc(28 * var(--u));
+  width: calc(319 * var(--u)); margin: 0; font-size: calc(18 * var(--u)); letter-spacing: -.045em;
+}
+.cta { position: absolute; right: var(--edge); bottom: calc(28 * var(--u)); }
+.cta:global(.pill) {
+  padding: calc(6 * var(--u)) calc(8 * var(--u)) calc(6 * var(--u)) calc(14 * var(--u));
+  font-size: calc(15 * var(--u));
+  letter-spacing: 0;
+  box-shadow: 0 calc(6 * var(--u)) calc(28 * var(--u)) rgba(0, 0, 0, 0.45);
+}
+.ctaInner {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(12 * var(--u));
+  direction: rtl;
+}
+.ctaLabel {
+  font-family: "Heebo", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.ctaIconBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: calc(40 * var(--u));
+  height: calc(40 * var(--u));
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--white);
+  transition: background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.ctaIcon {
+  width: calc(22 * var(--u));
+  height: calc(22 * var(--u));
+}
+@media (hover: hover) {
+  .cta:hover .ctaIconBadge {
+    background: var(--white);
+    color: var(--orange);
+    transform: scale(1.05);
+  }
+}
+.hero:not([data-ready]) :is(.name,.registered,.subrow,.notes,.cta), .hero:not([data-ready]) :global(nav) { opacity: 0; }
+.hero[data-ready] :global(nav) { animation: introNav .5s var(--ease) both; }
+.hero[data-ready] .name :global(.trim-display) > span { animation: introLetter .5s var(--ease) var(--delay) both; }
+.hero[data-ready] .subrow { animation: fade .5s var(--ease) 1.18s both; }
+.hero[data-ready] .registered { animation: fade .5s var(--ease) 1.48s both; }
+.hero[data-ready] .notes { animation: introUp .5s var(--ease) 1.55s both; }
+.hero[data-ready] .cta { animation: introUp .5s var(--ease) 2.075s backwards; }
+@keyframes introNav { from { opacity: 0; transform: translateY(calc(-16 * var(--u))); } }
+@keyframes introLetter { from { opacity: 0; transform: translateY(130%); filter: blur(calc(40 * var(--u))); } }
+@keyframes fade { from { opacity: 0; } }
+@keyframes introUp { from { opacity: 0; transform: translateY(calc(56 * var(--u))); } }
+@media (max-width: 1023px) {
+  .hero .name,
+  .hero .subrow,
+  .hero :global(nav) {
+    left: var(--edge);
+    right: var(--edge);
+  }
+  .hero .registered { right: var(--edge); }
+  .hero .notes { left: var(--edge); }
+  .hero .cta { left: var(--edge); right: auto; }
+  .shade { left: 0; height: calc(140 * var(--u)); }
+  .name {
+    top: calc(104 * var(--u));
+    font-size: calc(72 * var(--u));
+    gap: calc(20 * var(--u));
+  }
+  .nameGroup { width: auto; gap: .12em; }
+  .registered { top: calc(86 * var(--u)); font-size: calc(16 * var(--u)); }
+  .subrow { top: calc((104 + .729 * 72 + 18) * var(--u)); font-size: calc(11 * var(--u)); }
+  .notes { bottom: calc(89 * var(--u)); width: calc(300 * var(--u)); font-size: calc(13 * var(--u)); --lh: calc(17 * var(--u)); }
+  .cta { bottom: calc(20 * var(--u)); }
+  .cta:global(.pill) {
+    padding: calc(5 * var(--u)) calc(6 * var(--u)) calc(5 * var(--u)) calc(11 * var(--u));
+    font-size: calc(14 * var(--u));
+    box-shadow: 0 calc(4 * var(--u)) calc(20 * var(--u)) rgba(0, 0, 0, 0.4);
+  }
+  .ctaInner { gap: calc(10 * var(--u)); }
+  .ctaIconBadge {
+    width: calc(36 * var(--u));
+    height: calc(36 * var(--u));
+  }
+  .ctaIcon {
+    width: calc(20 * var(--u));
+    height: calc(20 * var(--u));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .media { transform: none; }
+  .hero[data-ready] :is(.name,.registered,.subrow,.notes,.cta), .hero[data-ready] :global(nav),
+  .hero[data-ready] .name :global(.trim-display) > span { animation: fade .4s var(--ease) both; }
+}

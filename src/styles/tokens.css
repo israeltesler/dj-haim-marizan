@@ -1,0 +1,27 @@
+:root {
+  --u: min(calc(100vw / 1440), calc(100svh / 900));
+  --black: #000;
+  --white: #fff;
+  --orange: #ff630f;
+  --grey: #949494;
+  --clock-grey: #747474;
+  --pill-text: #a9a9a9;
+  --muted: rgba(255, 255, 255, 0.5);
+  --rule: #e5e7eb;
+  --rule-soft: rgba(229, 231, 235, 0.5);
+  --cursor-fill: rgba(255, 255, 255, 0.5);
+  --sunset: linear-gradient(180deg, #000 0%, #ea4f16 60%, #f6af60 100%);
+  --hero-shade: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 100%);
+  --display: "Mona Sans", sans-serif;
+  --text: "Geist", sans-serif;
+  --ease: cubic-bezier(0.44, 0, 0.56, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --edge: calc(40 * var(--u));
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --u: min(calc(100vw / 415), calc(100svh / 760));
+    --edge: calc(20 * var(--u));
+  }
+}
